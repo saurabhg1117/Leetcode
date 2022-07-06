@@ -19,21 +19,14 @@ class Count_pair_with_given_sum
     }
     static int solution(int arr[],int n,int k)
     {
-        HashMap<Integer, Integer> hm=new HashMap<>();
-        for(int i=0;i<n;i++)
-        {
-            if(!hm.containsKey(arr[i]))
-                hm.put(arr[i],0);
-            hm.put(arr[i],hm.get(arr[i])+1);
-        }
         int count=0;
-        for(int i=0;i<n;i++)
-        {
-            if(hm.get(k-arr[i])!=null)           
-                count+=hm.get(k-arr[i]);
-            if(k-arr[i]==arr[i])
-                count--;
-        }
-        return count/2;
+		Map<Integer, Integer> map=new HashMap<>();
+		for (int i = 0; i < arr.length; i++) {
+			if(map.containsKey(k-arr[i])) {
+				count+=map.get(k-arr[i]);
+			}
+			map.put(arr[i],map.getOrDefault(arr[i], 0)+1);
+		}
+	return count;
     }
 }
