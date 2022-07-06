@@ -18,30 +18,20 @@ public class maximum_product_subarray {
     }
     static long prod(int arr[], int n)
     {
-        long maxprod=arr[0];
-        long minval=arr[0],maxval=arr[0],temp=0;
-        for(int i=1;i<n;i++)
-        {
-            temp=maxval;
-            maxval=Math.max(arr[i], Math.max(maxval*arr[i], minval*arr[i]));
-            minval=Math.min(arr[i], Math.min(temp*arr[i], minval*arr[i]));
-
-            maxprod=Math.max(maxval, maxprod);
-            /* Alternate way :
-            
-            if(arr[i]<0)
-            {
-                //This is the logic for swapping b/w minval and maxval
-                minval=maxval^minval;
-                maxval=maxval^minval;
-                minval=maxval^minval;
+        long ans=arr[0];
+        long ma=ans;
+        long mi=ans;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]<0){
+                long temp=ma;
+                ma=mi;
+                mi=temp;
             }
-            minval=Math.min(arr[i],minval*arr[i]);
-            maxval=Math.max(arr[i],maxval*arr[i]);
-
-            maxprod=Math.max(maxval,maxprod);
-             */
+            ma=Math.max(arr[i],ma*arr[i]);
+            mi=Math.min(arr[i],mi*arr[i]);
+            ans=Math.max(ans,ma);
+            
         }
-        return maxprod;
+        return ans;
     }
 }
