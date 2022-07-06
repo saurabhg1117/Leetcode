@@ -12,18 +12,20 @@ public class Kadanes_algo {
         System.out.println(maxsum(arr,n));
         sc.close();
     }
-    static int maxsum(int arr[],int n)
-    {
-        int max=arr[0],cmax=0;
-
-        for(int a:arr)
-        {
-            cmax+=a;
-            if(cmax>max)
-                max=cmax;
-            if(cmax<0)
-                cmax=0;
+    int maxSubarraySum(int arr[], int n){
+        
+        int maxSoFar=Integer.MIN_VALUE;
+        int maxEndingHere=0;
+        for(int i=0;i<arr.length;i++){
+            maxEndingHere+=arr[i];
+            if(maxEndingHere>maxSoFar){
+                maxSoFar=maxEndingHere;
+            }
+            if(maxEndingHere<0){
+                maxEndingHere=0;
+            }
         }
-        return max;
+        return maxSoFar;
+        
     }
 }
