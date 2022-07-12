@@ -16,11 +16,12 @@ public class Solution {
                 st.push(c);
             }
             else if(c=='}'){
-                if(!st.isEmpty() && st.peek()=='{'){
-                    st.pop();
-                }
-                else {
+                
+               if(st.isEmpty() || st.peek()=='}') {
                     st.push('}');
+                }
+                else{
+                    st.pop();
                 }
             }
         }
