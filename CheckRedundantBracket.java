@@ -1,22 +1,29 @@
-import java.util.Stack;
 public class Solution {
-  public static int[] stockSpan(int[] price) {
-    Stack < Integer > stk = new Stack < > ();
-    int n = price.length;
-    int[] output = new int[n];
-    stk.push(0);
-    output[0] = 1;
-    for (int i = 1; i < n; ++i) {
-      while (!stk.isEmpty() && price[stk.peek()] < price[i]) {
-        stk.pop();
-      }
-      if (stk.isEmpty()) {
-        output[i] = i + 1;
-      } else {
-        output[i] = i - stk.peek();
-      }
-      stk.push(i);
+  private static boolean find(char ch) {
+    if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+      return true;
     }
-    return output;
+    return false;
+  }
+  public static boolean checkRedundantBrackets(String expression) {
+    Stack < Character > stk = new Stack < > ();
+    for (int i = 0; i < expression.length(); ++i) {
+      if (expression.charAt(i) == '(' || find(expression.charAt(i))) {
+        stk.push(expression.charAt(i));
+      } else if (expression.charAt(i) == ')') {
+        boolean hasOperator = false;
+        while (!stk.isEmpty() && stk.peek() != '(') {
+          stk.pop();
+          hasOperator = true;
+        }
+        if (!hasOperator) {
+          return true;
+        }
+        if (!stk.isEmpty()) {
+          stk.pop();
+        }
+      }
+    }
+    return false;
   }
 }
